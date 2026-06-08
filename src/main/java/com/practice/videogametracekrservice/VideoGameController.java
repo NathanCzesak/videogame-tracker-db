@@ -9,23 +9,26 @@ import java.util.List;
 public class VideoGameController {
 
     private final VideoGameRepos vgRepos;
-    public VideoGameController(VideoGameRepos vgRepos) {
+    private final VideoGameService videoGameService;
+
+    public VideoGameController(VideoGameRepos vgRepos, VideoGameService videoGameService) {
         this.vgRepos = vgRepos;
+        this.videoGameService = videoGameService;
     }
 
     @GetMapping
     public List<VideoGame> getVideoGames() {
-        return vgRepos.findAll();
+        return videoGameService.getVideoGames();
     }
 
     @PostMapping
     public void addVideoGame(@RequestBody VideoGame videoGame) {
-        vgRepos.save(videoGame);
+        videoGameService.addVideoGame(videoGame);
     }
 
     @DeleteMapping("/{id}")
     public void deleteVideoGame(@PathVariable Long id) {
-        vgRepos.deleteById(id);
+        videoGameService.deleteVideoGame(id);
     }
 
 }

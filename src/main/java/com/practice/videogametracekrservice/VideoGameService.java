@@ -22,6 +22,9 @@ public class VideoGameService {
     }
 
     public void deleteVideoGame(Long id) {
+        if(!vgRepos.existsById(id)) {
+            throw new RuntimeException("Game with id " + id + " does not exist");
+        }
         vgRepos.deleteById(id);
     }
 
